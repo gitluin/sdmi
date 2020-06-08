@@ -23,5 +23,6 @@ Recent Statii
 To Do
 ----
  * Tab completion.
+ * Intelligent swapping (i.e. MAINDIS has been set to HDMI, but you want to mirror to HDMI)
 
 Please submit bug reports/feature requests as issues on the GitHub repository page!
