@@ -3,8 +3,18 @@
 test -z "$MAINDIS" && MAINDIS="eDP-1-1"
 
 # Better be sure you pass a valid output, fool
-DISPLAY=$2
+OUTPUT=$2
 POSITION=$3
+
+CheckMain () {
+	PRESENT="$(xrandr --listmonitors | grep $1 && echo 'TRUE')"
+	# Monitors: 1
+	# 0: +*HDMI-0 1920...... -> 0: +*HDMI-0 ... -> +*HDMI-0 -> HDMI-0
+	# sed call in case no * is present
+	test "PRESENT" = "TRUE" \
+		|| echo "$(xrandr --listmonitors | cut -d$'\n' -f2 \
+		| cut -d' ' -f3 | cut -d'*' -f2 | sed s/+//)"
+}
 
 AssertArgs () {
 	test $1 -ne $2 \
@@ -34,6 +44,9 @@ On () {
 			Usage
 			exit -1
 	esac
+
+	# If not default MAINDIS, will set it to other one
+	MAINDIS="$(CheckMain $1)"
 
 	xrandr --output "$MAINDIS" --auto --output "$1" --auto "$POSITION" "$MAINDIS"
 }
@@ -68,12 +81,12 @@ case "$1" in
 		;;
 	-on | --on)
 		AssertArgs $# 3
-		On $DISPLAY $POSITION
+		On $OUTPUT $POSITION
 		exit 1
 		;;
 	-of | --off)
 		AssertArgs $# 2
-		Off $DISPLAY
+		Off $OUTPUT
 		exit 1
 		;;
 	*)

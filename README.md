@@ -17,6 +17,7 @@ Installation and Usage
 
 Recent Statii
 ------
+* v1.1 - Support for controlling the state of $MAINDIS too.
 * v1.0 - Initial version. Can ask for help, turn on and off specific displays, control position of auxiliary displays.
 
 To Do
