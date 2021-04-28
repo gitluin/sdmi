@@ -1,3 +1,5 @@
+You probably want to use [this](https://github.com/phillipberndt/autorandr) instead.
+
 Some Dumb Monitor Interface tool
 =====
 What Is, Why Do
